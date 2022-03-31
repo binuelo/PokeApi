@@ -1,38 +1,109 @@
-.App {
+* {
+  box-sizing: border-box;
   text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.App {
+}
+.welcome-message {
+  margin-bottom: 15px;
+}
+.navimg {
+  width: 100%;
+  height: 200px;
+  z-index: 1;
+}
+.home {
+  left: 200px;
+  top: -100px;
+}
+nav {
+  width: 100%;
+  height: 120px;
+  background-image: url(assents/nav3.png);
+  background-repeat: inherit;
+  margin-bottom: 0 px;
+  padding-bottom: 0 px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.poke-list {
+  /*display: flex;
+  flex-wrap: wrap;*/
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+.col {
+  padding: 15px;
+  position: relative; /*Para mover la imagen debajo*/
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.imagen {
+  position: absolute; /*para sacar la imagen del flujo*/
+  right: 0; /*Mandarlo a la derecha*/
+  top: 5;
+}
+.cardokemon p {
+  text-align: left; /*movemos el txt a la derecha <p>*/
+}
+.bug {
+  background: #aedf78;
+}
+.water {
+  background: #43ccff;
+}
+.grass {
+  background: #00ca91;
+}
+.fire {
+  background: #e95c4d;
+}
+.normal {
+  background: #a5a5a5;
+}
+.bug p {
+  text-align: left;
+}
+.water p {
+  text-align: left;
+}
+.grass p {
+  text-align: left;
+}
+.fire p {
+  text-align: left;
+}
+.normal p {
+  text-align: left;
+}
+/*
+@media (min-width: 492px) {
+  .poke-list .col {
+    width: 50%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (min-width: 728px) {
+  .poke-list .col {
+    width: 33.3333%;
   }
 }
+
+@media (min-width: 992px) {
+  .poke-list .col {
+    width: 25%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .poke-list .col {
+    width: 20%;
+  }
+}
+*/
