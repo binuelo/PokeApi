@@ -27,7 +27,7 @@ const Characters = () => {
     //para evitar que se recarge de nuev la pagina
     e.preventDefault();
       //link para ingresar 
-    navigate(`/characters/${characterName}`);
+    navigate(`/pokedex/${characterName}`);
   };
 
   const handletype = (e) => {
@@ -40,9 +40,11 @@ const Characters = () => {
 
   return (
     <div>
-      <h1>Characters</h1>
+      <div className="barras">
+    
       <p className="welcome-message">Welcome {userName}</p>
       <div className="select">
+        Buscar por tipo
         <select onChange={handletype} > {/*Listado de opciones*/}
           {types.map((type) => (
             <option key={type.url} value={type.url}>
@@ -63,6 +65,7 @@ const Characters = () => {
         />
         <button>Buscar</button>
       </form>
+      </div>
      <ul className="poke-list">
         {characters.map((character) => (
           <CharacterCard

@@ -16,7 +16,7 @@ const Login = () => {
       payload: userName
     });
     setUserName(true);
-    navigate("/characters");
+    navigate("/pokedex");
   };
 
   return (
