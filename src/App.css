@@ -1,396 +1,229 @@
+/* Reset + tipografía futurista */
 * {
-  box-sizing: border-box;
-  text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   margin: 0;
   padding: 0;
-}
-.App {
-}
-.welcome-message {
-  margin-bottom: 15px;
-}
-.navimg {
-  width: 100%;
-  height: 200px;
-  z-index: 1;
-}
-.home {
-  left: 200px;
-  top: -100px;
-}
-nav {
-  width: 100%;
-  height: 120px;
-  background-image: url(assents/nav3.png);
-  background-repeat: inherit;
-  margin-bottom: 0 px;
-  padding-bottom: 0 px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', 'Roboto', 'Orbitron', monospace, sans-serif;
 }
 
+/* Fondo global futurista (igual que el login) */
+body, #root, .App {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #0d001a, #1a0033, #001a33, #0a1f44);
+  background-size: 400% 400%;
+  animation: gradientFlow 18s ease infinite;
+  color: #e0e0ff;
+}
+
+/* Animación del gradiente */
+@keyframes gradientFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Scanlines sutiles (efecto cyberpunk) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 255, 255, 0.015) 2px,
+    rgba(0, 255, 255, 0.015) 4px
+  );
+  animation: scan 12s linear infinite;
+  z-index: -1;
+}
+
+@keyframes scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Lista de cards - orden izquierda → derecha, luego abajo */
 .poke-list {
   list-style: none;
-  padding: 0;
+  padding: 2.5rem 1.5rem;
+  margin: 0 auto;
+  max-width: 1800px;                /* limita para que no sea infinito en pantallas muy anchas */
+
   display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem 1.8rem;
+
+  perspective: 1200px;
+}
+
+/* 5-6 por fila en pantallas grandes */
+@media (min-width: 1100px) {
+  .poke-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2.2rem 2rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .poke-list {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+/* Card base - ahora con flex column para dividir alturas */
+.cardokemon {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-width: 260px;
+  margin: 0 auto;
+
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    inset 0 0 25px rgba(255, 255, 255, 0.05);
+
+  overflow: hidden;
+  transition: all 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: rotate(calc(var(--r, 0) * 1deg)) translateZ(0);
+
+  /* División en 3 partes con flex */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rotación inicial */
+.cardokemon:nth-child(4n+1) { --r: -6; }
+.cardokemon:nth-child(4n+2) { --r:  5; }
+.cardokemon:nth-child(4n+3) { --r:  7; }
+.cardokemon:nth-child(4n)   { --r: -4; }
+
+/* Hover */
+.cardokemon:hover {
+  transform: rotate(0deg) translateY(-16px) scale(1.06) translateZ(50px);
+  box-shadow: 
+    0 35px 80px rgba(0, 0, 0, 0.55),
+    0 0 60px var(--type-glow, rgba(100, 200, 255, 0.5));
+  z-index: 10;
+}
+
+/* Encabezado: 20% */
+.pokemon-name {
+  flex: 0 0 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 0.5rem;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #e0e0ff, #a0a0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(160, 160, 255, 0.6);
+  text-align: center;
+}
+
+/* Contenido imagen: 40% */
+.image-container {
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  position: relative;
 }
 
 .imagen {
-  position: absolute; /*para sacar la imagen del flujo*/
-  right: 0; /*Mandarlo a la derecha*/
-  top: 5;
-}
-.cardokemon p {
-  text-align: left; /*movemos el txt a la derecha <p>*/
-}
-.bugcol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px #aedf78;
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 10px;
-}
-.watercol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px #43ccff;
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 10px;
-}
-.grasscol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px #00ca91;
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 10px;
-}
-.firecol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px #e95c4d;
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 10px;
-}
-.normalcol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px #a5a5a5;
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 10px;
+  width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.5));
+  transition: transform 0.6s;
 }
 
-.bug {
-  background: #aedf78;
-  border-radius: 10%;
+.cardokemon:hover .imagen {
+  transform: scale(1.12);
 }
-.water {
-  background: #43ccff;
-  border-radius: 10%;
+
+/* Pie de página stats: 50% */
+.stats-container {
+  flex: 0 0 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 0.98rem;
+  color: #d8e0ff;
+  overflow: hidden;
 }
-.grass {
-  background: #00ca91;
-  border-radius: 10%;
+
+.stats-container p {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.fire {
-  background: #e95c4d;
-  border-radius: 10%;
+
+.stats-container .label {
+  min-width: 110px;
+  font-weight: 600;
+  color: var(--type-glow, #a0c0ff);
+  text-shadow: 0 0 8px var(--type-glow);
 }
-.fightingcol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px blueviolet;
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 10px;
+
+.stats-container .value {
+  font-weight: 500;
+  color: #e0e0ff;
 }
-.fighting {
-  background: blueviolet;
-  border-radius: 10%;
+
+/* Mantén tus variables por tipo (glow y bordes) */
+:root {
+  --bug-glow: #a6d608;
+  --water-glow: #6390f0;
+  --fire-glow: #ee8130;
+  --grass-glow: #7ac74c;
+  --normal-glow: #a8a77a;
+  --electric-glow: #f7d02c;
+  --fighting-glow: #c22e28;
+  --poison-glow: #a33ea1;
+  --rock-glow: #b6a136;
+  --ghost-glow: #735797;
+  --steel-glow: #b7b9d0;
+  --psychic-glow: #f95587;
+  --ice-glow: #96d9d6;
+  --dragon-glow: #6f35fc;
+  --dark-glow: #705746;
+  --fairy-glow: #d685ad;
 }
-.fighting p {
-  text-align: left;
+
+.bugcol     { --type-glow: var(--bug-glow);     border-color: rgba(166, 214, 8, 0.5);     background: rgba(166, 214, 8, 0.08); }
+.watercol   { --type-glow: var(--water-glow);   border-color: rgba(99, 144, 240, 0.5);   background: rgba(99, 144, 240, 0.08); }
+/* ... mantén todas las demás .xxxcol que ya tenías */
+
+/* Hover extra para borde tipo */
+.cardokemon:hover {
+  border-color: var(--type-glow);
 }
-.poisoncol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgb(127, 127, 231);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 10px;
-}
-.poison {
-  background: rgb(127, 127, 231);
-  border-radius: 10%;
-}
-.poison p {
-  text-align: left;
-}
-.rockcol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgb(1, 1, 10);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.rock {
-  background: rgba(1, 1, 10, 0.425);
-  border-radius: 5%;
-}
-.rock p {
-  text-align: left;
-  padding-left: 5px;
-  color: aliceblue;
-}
-.ghostcol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgba(104, 46, 158, 0.692);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.ghost {
-  background: rgba(104, 46, 158, 0.692);
-  border-radius: 5%;
-}
-.ghost p {
-  text-align: left;
-  padding-left: 5px;
-}
-.electriccol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px yellow;
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.electric {
-  background: yellow;
-  border-radius: 5%;
-}
-.electric p {
-  text-align: left;
-  padding-left: 5px;
-}
-.steelcol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgb(167, 164, 164);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.steel {
-  background: rgb(167, 164, 164);
-  border-radius: 5%;
-}
-.steel p {
-  text-align: left;
-  padding-left: 5px;
-}
-.psychiccol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgb(128, 128, 3);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.psychic {
-  background: rgb(128, 128, 3);
-  border-radius: 5%;
-}
-.psychic p {
-  text-align: left;
-  padding-left: 5px;
-}
-.icecol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgb(78, 184, 255);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.ice {
-  background: rgb(78, 184, 255);
-  border-radius: 5%;
-}
-.ice p {
-  text-align: left;
-  padding-left: 5px;
-}
-.dragoncol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgb(11, 220, 0);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.dragon {
-  background: rgb(11, 220, 0);
-  border-radius: 5%;
-}
-.dragon p {
-  text-align: left;
-  padding-left: 5px;
-}
-.darkcol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgba(86, 27, 134, 0.705);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.dark {
-  background: rgba(86, 27, 134, 0.705);
-  border-radius: 5%;
-}
-.dark p {
-  text-align: left;
-  padding-left: 5px;
-}
-.fairycol {
-  width: 190px;
-  height: 160px;
-  border-radius: 15%;
-  background-color: rgb(250, 246, 248);
-  border: solid 5px rgba(241, 99, 196, 0.705);
-  position: relative; /*Para mover la imagen debajo*/
-  padding: 5px;
-}
-.fairy {
-  background: rgba(241, 99, 196, 0.705);
-  border-radius: 5%;
-}
-.fairy p {
-  text-align: left;
-  padding-left: 5px;
-}
-.normal {
-  background: #a5a5a5;
-  border-radius: 10%;
-}
-.bug p {
-  text-align: left;
-}
-.water p {
-  text-align: left;
-}
-.grass p {
-  text-align: left;
-}
-.fire p {
-  text-align: left;
-}
-.normal p {
-  text-align: left;
-}
-.image1 {
-  padding-top: 30px;
-  display: grid;
-  grid-template-columns: 35% 30% 35%;
-  grid-template-rows: 30% 30% 30% 10%;
-}
-.image2 {
-  grid-column: 2;
-}
-.dataimage {
-  display: grid;
-  grid-template-columns: 40% 20% 40%;
-  grid-row: 4;
-  grid-column: 2/3;
-}
-.dataimage h1 {
-  text-align: center;
-}
-.dataimage1 {
-  grid-row: inherit;
-  font-size: 20px;
-}
-.dataimage2 {
-  grid-row: inherit;
-  font-size: 20px;
-}
-.dataimage3 {
-  grid-row: inherit;
-  font-size: 20px;
-}
-.infoimage {
-  color: beige;
-  width: 100%;
-  height: 535px;
-  display: grid;
-  grid-template-columns: 80% 20%;
-  background-image: url(https://img.wallpapersafari.com/desktop/1680/1050/31/26/tHEULI.jpg);
-}
-.type {
-  margin-top: 30px;
-  padding-top: 20px;
-}
-.type p {
-  background-color: #00ca91;
-  border: 5px solid black;
-  margin: 10px;
-}
-.barras {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  margin-bottom: 20px;
-}
+
+/* Welcome message */
 .welcome-message {
-  margin-top: 20px;
-  grid-column: 1/3;
+  grid-column: 1 / -1;
+  margin: 1.5rem 0 2.5rem;
+  font-size: 2.2rem;
+  text-align: center;
+  color: #e0e0ff;
+  text-shadow: 0 0 25px rgba(160, 160, 255, 0.6);
 }
-/*
-@media (min-width: 492px) {
-  .poke-list .col {
-    width: 50%;
-  }
-}
-
-@media (min-width: 728px) {
-  .poke-list .col {
-    width: 33.3333%;
-  }
-}
-
-@media (min-width: 992px) {
-  .poke-list .col {
-    width: 25%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .poke-list .col {
-    width: 20%;
-  }
-}
-*/

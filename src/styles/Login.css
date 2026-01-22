@@ -1,0 +1,188 @@
+/* Fondo animado cyberpunk / space gradient */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #0d001a, #1a0033, #001a33, #0a1f44);
+  background-size: 400% 400%;
+  animation: gradientFlow 18s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #e0e0ff;
+  overflow: hidden;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Contenedor principal con glassmorphism */
+.login-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem 2.5rem;
+  background: rgba(20, 15, 60, 0.28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(100, 120, 255, 0.22);
+  border-radius: 28px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7),
+              inset 0 0 30px rgba(100, 150, 255, 0.08);
+  overflow: hidden;
+}
+
+/* Neon glow alrededor del contenedor */
+.login-container::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(45deg, #00d4ff, #ff00d4, #7c00ff, #00d4ff);
+  background-size: 300%;
+  filter: blur(25px);
+  opacity: 0.18;
+  animation: neonPulse 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes neonPulse {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* Título con efecto neon */
+.neon-title {
+  text-align: center;
+  font-size: 3.2rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #00f0ff, #c084fc, #ff00d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #a0a0ff;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Input con floating label y glow */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 1.8rem;
+}
+
+.neon-input {
+  width: 100%;
+  padding: 1.1rem 1.4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(100, 150, 255, 0.35);
+  border-radius: 14px;
+  color: white;
+  font-size: 1.1rem;
+  transition: all 0.35s ease;
+}
+
+.neon-input:focus {
+  outline: none;
+  border-color: #00f0ff;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.floating-label {
+  position: absolute;
+  left: 1.4rem;
+  top: 1.1rem;
+  color: #a0a0ff;
+  pointer-events: none;
+  transition: all 0.35s ease;
+  font-size: 1.05rem;
+}
+
+.neon-input:focus + .floating-label,
+.neon-input:not(:placeholder-shown) + .floating-label {
+  top: -0.9rem;
+  left: 1.1rem;
+  font-size: 0.9rem;
+  background: rgba(13, 0, 26, 0.85);
+  padding: 0 0.6rem;
+  color: #00f0ff;
+}
+
+/* Botón futurista */
+.neon-button {
+  width: 100%;
+  padding: 1.2rem;
+  background: linear-gradient(90deg, #00f0ff, #c084fc, #ff00d4);
+  background-size: 200%;
+  border: none;
+  border-radius: 14px;
+  color: #0a001a;
+  font-size: 1.15rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.45);
+  animation: buttonGradient 6s linear infinite;
+}
+
+.neon-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 55px rgba(0, 240, 255, 0.7);
+}
+
+@keyframes buttonGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.neon-button.loading {
+  background: linear-gradient(90deg, #555, #777, #555);
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #ff4d94;
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: 500;
+  text-shadow: 0 0 10px rgba(255, 77, 148, 0.6);
+}
+
+/* Links extra */
+.extra-links {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #a0a0ff;
+}
+
+.extra-links a {
+  color: #00f0ff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.extra-links a:hover {
+  color: #ff00d4;
+  text-shadow: 0 0 12px rgba(255, 0, 212, 0.7);
+}
