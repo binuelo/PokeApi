@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../styles/card.css"
-import fondo from "../assents/fondopok.png"
 const CharacterInfo = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState({});//Para guardar l arespuesta 
@@ -18,7 +17,7 @@ const CharacterInfo = () => {
 
       <div className="image1">
       <section className="image2">
-        <img className="imagePokemon" src={character.sprites?.other.dream_world.front_default} alt="" width={"300px"} height={"300px"}/>
+        <img src={character.sprites?.other.dream_world.front_default} alt="" width={"300px"} height={"300px"}/>
         <h1>{character.name?.toUpperCase()}</h1>
       
       <section className="dataimage">

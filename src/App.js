@@ -3,7 +3,6 @@ import CharacterInfo from "./components/CharacterInfo";
 import Characters from "./components/Characters";
 import Login from "./components/Login";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import imagenPok from "./assents/pok.jpg"
 import './App.css';
 
 function App() {
