@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route,Link } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo";
 import Characters from "./components/Characters";
 import Login from "./components/Login";
