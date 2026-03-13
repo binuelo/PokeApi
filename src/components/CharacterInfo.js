@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Aps from "../App.css"
+import "../styles/card.css"
 import fondo from "../assents/fondopok.png"
 const CharacterInfo = () => {
   const { id } = useParams();
@@ -18,7 +18,7 @@ const CharacterInfo = () => {
 
       <div className="image1">
       <section className="image2">
-        <img src={character.sprites?.other.dream_world.front_default} alt="" width={"300px"} height={"300px"}/>
+        <img className="imagePokemon" src={character.sprites?.other.dream_world.front_default} alt="" width={"300px"} height={"300px"}/>
         <h1>{character.name?.toUpperCase()}</h1>
       
       <section className="dataimage">
@@ -47,9 +47,6 @@ const CharacterInfo = () => {
      <p><b>HP:</b> {character.stats?.[0].base_stat}</p>
      <p><b>Attack:</b> {character.stats?.[1].base_stat}</p>
 
-
-      </div>
-      <div className="abilities">
 
       </div>
     </div>
